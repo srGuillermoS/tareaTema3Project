@@ -6,3 +6,7 @@ class Cliente(db.Model):
     nombre = db.Column(db.String(20), nullable=False)
     apellidos = db.Column(db.String(50), nullable=False)
     imagen = db.Column(db.String, nullable=False)
+
+    def saveCliente(self):
+        db.session.add(self)
+        db.session.commit()

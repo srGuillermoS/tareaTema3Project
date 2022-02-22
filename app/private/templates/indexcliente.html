@@ -23,7 +23,7 @@
                     <td>{{ cliente.dni }}</td>
                     <td>{{ cliente.nombre }}</td>
                     <td>{{ cliente.apellidos }}</td>
-                    <td>{{ cliente.imagen }}</td>
+                    <td><img src="data:image/jpg;base64,{{ cliente.imagen }}" alt="img_data" id="imgslot"/></td>
                 </tr>
             {% endfor %}
             </tbody>
