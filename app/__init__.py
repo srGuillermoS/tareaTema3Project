@@ -16,8 +16,10 @@ migrate = Migrate(app,db)
 
 from .public import public
 from .private import private
+from .login import login
 
 def create_app():
     app.register_blueprint(public)
     app.register_blueprint(private)
+    app.register_blueprint(login)
     return app
