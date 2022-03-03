@@ -31,10 +31,10 @@ def createcliente():
         max_length = 1024*1024
         if len(encoded_bytes) > max_length:
             form.imagen.errors.append("Tamaño máximo 1MB")
-            return render_template("createcliente.html", form=form)
+            return render_template("registeruser.html", form=form)
 
         cliente.imagen = str(encoded_bytes).replace("b'", "").replace("'", "")
         cliente.saveCliente()
         return redirect(url_for("private.indexcliente"))
 
-    return render_template("createcliente.html", form=form)
+    return render_template("registeruser.html", form=form)
