@@ -13,10 +13,10 @@ def indexcliente():
     form = FilterForm(request.form)
     if form.validate_on_submit():
         clientes = Cliente.query.filter_by(nombre=form.nombre.data)
-        return render_template("logincliente.html", form=form, clientes=clientes)
+        return render_template("indexcliente.html", form=form, clientes=clientes)
 
     clientes = Cliente.query.all()
-    return render_template("logincliente.html", form=form, clientes=clientes)
+    return render_template("indexcliente.html", form=form, clientes=clientes)
 
 
 @private.route("/createcliente/", methods=["GET", "POST"])

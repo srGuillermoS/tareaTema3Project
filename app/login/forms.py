@@ -35,10 +35,29 @@ class RegisterForm(FlaskForm):
     ])
 
     def validate_password(form,field):
-        if str(field.data).isdigit():
-            raise ValidationError("La contraseña no pueden ser solo dígitos")
+
+        hasDigit = False
+        hasUpper = False
+        hasSpecialChar = False
+        for char in field.data:
+            if char.isdigit():
+                hasDigit = True
+            if char.isupper():
+                hasUpper = True
+            if not char.isalnum():
+                hasSpecialChar = True
+
+        if not hasUpper or not hasDigit or not hasSpecialChar:
+            raise ValidationError("La contraseña necesita al menos un número una mayúscula y un carácter especial")
+
+
         if field.data != form.passwordRepeat.data:
             raise ValidationError("No coinciden las contraseñas")
+
+
+
+
+
 
     def validate_passwordRepeat(form, field):
         if field.data != form.password.data:

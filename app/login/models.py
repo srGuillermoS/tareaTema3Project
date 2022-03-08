@@ -26,7 +26,7 @@ class Usuario(db.Model):
 
     @staticmethod
     def get_by_username(username):
-        return Usuario.query.filter_by(username=username)
+        return Usuario.query.filter_by(username=username).first()
 
 
     def set_password(self, password):
