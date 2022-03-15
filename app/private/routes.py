@@ -1,6 +1,7 @@
 import base64
 
 from flask import render_template, request, redirect, url_for
+from flask_login import current_user
 from werkzeug.datastructures import CombinedMultiDict
 
 from . import private
@@ -10,17 +11,20 @@ from .models import Cliente
 
 @private.route("/indexcliente/", methods=["GET", "POST"])
 def indexcliente():
+    if not current_user.is_authenticated:
+        return redirect(url_for('public.index'))
     form = FilterForm(request.form)
     if form.validate_on_submit():
         clientes = Cliente.query.filter_by(nombre=form.nombre.data)
         return render_template("indexcliente.html", form=form, clientes=clientes)
-
     clientes = Cliente.query.all()
     return render_template("indexcliente.html", form=form, clientes=clientes)
 
 
 @private.route("/createcliente/", methods=["GET", "POST"])
 def createcliente():
+    if not current_user.is_authenticated:
+        return redirect(url_for('public.index'))
     form = CreateForm(CombinedMultiDict((request.files, request.form)))
     if form.validate_on_submit():
         cliente = Cliente()
