@@ -75,4 +75,4 @@ class LoginForm(FlaskForm):
         DataRequired(message="La contraseña es obligatoria"),
         Length(min=8, message="La contraseña no puede ser inferior a 8 caracteres")
     ])
-    recuerdame = BooleanField(label="Recuerdame")
+    # recuerdame = BooleanField(label="Recuerdame")

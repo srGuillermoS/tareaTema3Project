@@ -10,11 +10,11 @@ from flask_login import login_user, logout_user, current_user, login_required
 
 
 @login.route("/registeruser/", methods=["GET", "POST"])
-@login_required
+
 def registeruser():
     error = ""
-    # if current_user.is_authenticated:
-    #     return redirect(url_for('public.index'))
+    if current_user.is_authenticated:
+        return redirect(url_for('public.index'))
 
     form = RegisterForm(request.form)
     if form.validate_on_submit():
@@ -53,7 +53,7 @@ def loginuser():
             return redirect(url_for("private.indexcliente"))
         else:
             error = "Usuario y/o contraseña incorrecta"
-    return render_template("index.html", form=form, error=error)
+    return render_template("loginuser.html", form=form, error=error)
 
 
 @app.login_manager.user_loader
