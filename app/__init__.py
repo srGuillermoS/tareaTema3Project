@@ -14,6 +14,7 @@ db = SQLAlchemy(app)
 migrate = Migrate(app,db)
 
 login_manager = LoginManager(app)
+login_manager.login_view = "login.loginuser"
 
 from .public import public
 from .private import private

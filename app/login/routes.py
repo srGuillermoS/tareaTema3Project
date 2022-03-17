@@ -6,15 +6,15 @@ import app
 from . import login
 from .forms import RegisterForm, LoginForm
 from .models import Usuario
-from flask_login import login_user, logout_user, current_user
-
+from flask_login import login_user, logout_user, current_user, login_required
 
 
 @login.route("/registeruser/", methods=["GET", "POST"])
+@login_required
 def registeruser():
     error = ""
-    if current_user.is_authenticated:
-        return redirect(url_for('public.index'))
+    # if current_user.is_authenticated:
+    #     return redirect(url_for('public.index'))
 
     form = RegisterForm(request.form)
     if form.validate_on_submit():
@@ -53,7 +53,7 @@ def loginuser():
             return redirect(url_for("private.indexcliente"))
         else:
             error = "Usuario y/o contraseña incorrecta"
-    return render_template("loginuser.html", form=form, error=error)
+    return render_template("index.html", form=form, error=error)
 
 
 @app.login_manager.user_loader
@@ -61,8 +61,9 @@ def load_user(user_id):
     return Usuario.get_by_id(user_id)
 
 @login.route("/logoutsession/")
+@login_required
 def logoutsession():
-    if not current_user.is_authenticated:
-        return redirect(url_for('public.index'))
+    # if not current_user.is_authenticated:
+    #     return redirect(url_for('public.index'))
     logout_user()
     return redirect(url_for('public.index'))
