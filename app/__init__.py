@@ -2,6 +2,7 @@ from flask import Flask, render_template, request
 from flask_login import LoginManager
 from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
+from .log.logs import configure_loggin
 
 app = Flask(__name__)
 app.secret_key = "ClaveSecreta"
@@ -15,11 +16,13 @@ migrate = Migrate(app,db)
 
 login_manager = LoginManager(app)
 login_manager.login_view = "login.loginuser"
+logger = configure_loggin(__name__)
 
 from .public import public
 from .private import private
 from .login import login
 from .admin import admin
+
 
 def create_app():
     app.register_blueprint(public)
