@@ -14,7 +14,7 @@ def configure_loggin(name):
     logger.setLevel(logging.INFO)
 
     #Manejador para grabar los mensajes en ficheros
-    fileHandler = logging.FileHandler("logs.log")
+    fileHandler = logging.FileHandler("logs/logs.log")
     fileHandler.setFormatter(logFormatter)
     logger.addHandler(fileHandler)
 

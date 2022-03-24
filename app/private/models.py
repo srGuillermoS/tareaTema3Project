@@ -8,5 +8,8 @@ class Cliente(db.Model):
     imagen = db.Column(db.String, nullable=False)
 
     def saveCliente(self):
-        db.session.add(self)
-        db.session.commit()
+        try:
+            db.session.add(self)
+            db.session.commit()
+        except Exception:
+            raise Exception("Error al guardar cliente en la base datos")

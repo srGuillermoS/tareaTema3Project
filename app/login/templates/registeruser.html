@@ -4,6 +4,11 @@
 {% block contenido %}
     <h1>Registrar usuario</h1>
     <div class="row">
+    {%  if error %}
+        <div class="alert alert-danger" role="alert">
+            {{ error }}
+        </div>
+    {% endif %}
     <form action="{{ url_for('login.registeruser') }}" method="post">
         {{ generarForm(form) }}
         <input type="submit" value="Registrar">

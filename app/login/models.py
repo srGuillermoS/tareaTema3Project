@@ -15,20 +15,29 @@ class Usuario(db.Model, UserMixin):
     def __str__(self):
         return f"{self.apellidos}, {self.nombre}"
 
+
     def create(self):
         try:
             db.session.add(self)
             db.session.commit()
         except:
-            raise
+            raise Exception("Error al hacer el registro en la base datos")
+
 
     @staticmethod
     def get_by_id(id):
-        return Usuario.query.get(id)
+        try:
+            return Usuario.query.get(id)
+        except:
+            raise Exception("Ha ocurrido un error")
+
 
     @staticmethod
     def get_by_username(username):
-        return Usuario.query.filter_by(username=username).first()
+        try:
+            return Usuario.query.filter_by(username=username).first()
+        except:
+            raise Exception("Ha ocurrido un error")
 
 
     def set_password(self, password):
