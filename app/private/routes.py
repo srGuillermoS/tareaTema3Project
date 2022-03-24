@@ -10,9 +10,9 @@ from .models import Cliente
 
 
 @private.route("/indexcliente/", methods=["GET", "POST"])
+@login_required
 def indexcliente():
-    if not current_user.is_authenticated:
-        return redirect(url_for('public.index'))
+
     form = FilterForm(request.form)
     if form.validate_on_submit():
         clientes = Cliente.query.filter_by(nombre=form.nombre.data)
