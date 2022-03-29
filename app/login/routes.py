@@ -25,6 +25,7 @@ def registeruser():
             usuario.apellidos = form.apellidos.data
             usuario.dni = form.dni.data
             usuario.create()
+            app.logger.info("Usuario registrado de forma correcta - " + usuario.username)
             return redirect(url_for('login.registeruser'))
         except Exception as e:
             app.logger.exception(e.__str__())
@@ -47,11 +48,13 @@ def loginuser():
             if usuario and usuario.check_password(password):
                 login_user(usuario)
                 login_user(usuario, form.recuerdame.data)
+                app.logger.info(username + " logado correctamente")
                 return redirect(url_for("private.indexcliente"))
             else:
                 error = "Usuario y/o contraseña incorrecta"
+                app.logger.warning(error + " " + username)
     except Exception as e:
-        app.logger.warning(e.__str__())
+        app.logger.exception(e.__str__())
         error = "Nombre de usuario y/o contraseña incorrectos"
     return render_template("loginuser.html", form=form, error=error)
 
