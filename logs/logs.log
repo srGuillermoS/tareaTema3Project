@@ -38,3 +38,11 @@ Traceback (most recent call last):
   File "/home/ubuntu/PycharmProjects/tareaTema3Project-master/app/login/routes.py", line 53, in loginuser
     login_user(usuario, form.recuerdame.data)
 AttributeError: 'LoginForm' object has no attribute 'recuerdame'
+[2022-03-31 16:31:44,512.512]	 ERROR [	app.loginuser:61]	 'LoginForm' object has no attribute 'recuerdame'
+Traceback (most recent call last):
+  File "/home/ubuntu/PycharmProjects/tareaTema3Project-master/app/login/routes.py", line 53, in loginuser
+    login_user(usuario, form.recuerdame.data)
+AttributeError: 'LoginForm' object has no attribute 'recuerdame'
+[2022-03-31 16:32:30,769.769]	 WARNING [	app.loginuser:58]	 Usuario y/o contraseña incorrecta admi
+[2022-03-31 16:36:40,125.125]	 INFO [	app.loginuser:54]	 admi logado correctamente
+[2022-03-31 16:39:24,561.561]	 INFO [	app.loginuser:53]	 admi logado correctamente

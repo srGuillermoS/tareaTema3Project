@@ -49,13 +49,13 @@ def loginuser():
                 password = form.password.data
                 usuario = Usuario.get_by_username(username)
                 if usuario and usuario.check_password(password):
-                    login_user(usuario)
                     login_user(usuario, form.recuerdame.data)
                     app.logger.info(username + " logado correctamente")
                     return redirect(url_for("private.indexcliente"))
                 else:
                     error = "Usuario y/o contraseña incorrecta"
                     app.logger.warning(error + " " + username)
+            error = "No eres humano"
     except Exception as e:
         app.logger.exception(e.__str__())
         error = "Nombre de usuario y/o contraseña incorrectos"
