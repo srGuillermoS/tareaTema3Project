@@ -21,3 +21,20 @@ Traceback (most recent call last):
   File "/usr/local/lib/python3.8/dist-packages/flask/app.py", line 1701, in make_response
     raise TypeError(
 TypeError: The view function for 'login.registeruser' did not return a valid response. The function either returned None or ended without a return statement.
+[2022-03-31 16:26:42,968.968]	 ERROR [	app.log_exception:1457]	 Exception on /registeruser/ [GET]
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.8/dist-packages/flask/app.py", line 2073, in wsgi_app
+    response = self.full_dispatch_request()
+  File "/usr/local/lib/python3.8/dist-packages/flask/app.py", line 1519, in full_dispatch_request
+    return self.finalize_request(rv)
+  File "/usr/local/lib/python3.8/dist-packages/flask/app.py", line 1538, in finalize_request
+    response = self.make_response(rv)
+  File "/usr/local/lib/python3.8/dist-packages/flask/app.py", line 1701, in make_response
+    raise TypeError(
+TypeError: The view function for 'login.registeruser' did not return a valid response. The function either returned None or ended without a return statement.
+[2022-03-31 16:28:36,023.23]	 INFO [	app.registeruser:29]	 Usuario registrado de forma correcta - admi
+[2022-03-31 16:29:03,580.580]	 ERROR [	app.loginuser:60]	 'LoginForm' object has no attribute 'recuerdame'
+Traceback (most recent call last):
+  File "/home/ubuntu/PycharmProjects/tareaTema3Project-master/app/login/routes.py", line 53, in loginuser
+    login_user(usuario, form.recuerdame.data)
+AttributeError: 'LoginForm' object has no attribute 'recuerdame'

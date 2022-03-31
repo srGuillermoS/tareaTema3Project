@@ -16,7 +16,6 @@ def registeruser():
         return redirect(url_for('public.index'))
     form = RegisterForm(request.form)
 
-
     if form.validate_on_submit():
         if app.recaptcha.verify():
             try:
@@ -32,7 +31,7 @@ def registeruser():
             except Exception as e:
                 app.logger.exception(e.__str__())
                 error = "No se ha poddido realizar el registro"
-        return render_template("registeruser.html", form=form, error=error)
+    return render_template("registeruser.html", form=form, error=error)
 
 
 
