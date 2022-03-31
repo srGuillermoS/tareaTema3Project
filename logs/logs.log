@@ -1,3 +1,1 @@
-[2022-03-24 16:33:15,046.46]	 INFO [	app.index:9]	 Primer log
-[2022-03-24 16:33:19,078.78]	 INFO [	app.index:9]	 Primer log
-[2022-03-24 16:33:19,811.811]	 INFO [	app.index:9]	 Primer log
+[2022-03-29 20:48:09,264.264]	 WARNING [	app.loginuser:55]	 Usuario y/o contraseña incorrecta Admin
