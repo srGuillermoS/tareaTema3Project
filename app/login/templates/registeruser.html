@@ -11,6 +11,7 @@
     {% endif %}
     <form action="{{ url_for('login.registeruser') }}" method="post">
         {{ generarForm(form) }}
+        {{ recaptcha }}
         <input type="submit" value="Registrar">
     </form>
     </div>

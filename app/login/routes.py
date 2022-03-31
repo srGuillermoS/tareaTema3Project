@@ -14,24 +14,26 @@ def registeruser():
     error = ""
     if current_user.is_authenticated:
         return redirect(url_for('public.index'))
-
     form = RegisterForm(request.form)
-    if form.validate_on_submit():
-        try:
-            usuario = Usuario()
-            usuario.username = form.username.data
-            usuario.set_password(form.password.data)
-            usuario.nombre = form.nombre.data
-            usuario.apellidos = form.apellidos.data
-            usuario.dni = form.dni.data
-            usuario.create()
-            app.logger.info("Usuario registrado de forma correcta - " + usuario.username)
-            return redirect(url_for('login.registeruser'))
-        except Exception as e:
-            app.logger.exception(e.__str__())
-            error = "No se ha poddido realizar el registro" + e.__str__()
 
-    return render_template("registeruser.html", form=form, error=error)
+
+    if form.validate_on_submit():
+        if app.recaptcha.verify():
+            try:
+                usuario = Usuario()
+                usuario.username = form.username.data
+                usuario.set_password(form.password.data)
+                usuario.nombre = form.nombre.data
+                usuario.apellidos = form.apellidos.data
+                usuario.dni = form.dni.data
+                usuario.create()
+                app.logger.info("Usuario registrado de forma correcta - " + usuario.username)
+                return redirect(url_for('login.registeruser'))
+            except Exception as e:
+                app.logger.exception(e.__str__())
+                error = "No se ha poddido realizar el registro"
+        return render_template("registeruser.html", form=form, error=error)
+
 
 
 @login.route("/loginuser/", methods=["GET", "POST"])
@@ -41,18 +43,20 @@ def loginuser():
         if current_user.is_authenticated:
             return redirect(url_for('public.index'))
         form = LoginForm(request.form)
+
         if form.validate_on_submit():
-            username = form.username.data
-            password = form.password.data
-            usuario = Usuario.get_by_username(username)
-            if usuario and usuario.check_password(password):
-                login_user(usuario)
-                login_user(usuario, form.recuerdame.data)
-                app.logger.info(username + " logado correctamente")
-                return redirect(url_for("private.indexcliente"))
-            else:
-                error = "Usuario y/o contraseña incorrecta"
-                app.logger.warning(error + " " + username)
+            if app.recaptcha.verify():
+                username = form.username.data
+                password = form.password.data
+                usuario = Usuario.get_by_username(username)
+                if usuario and usuario.check_password(password):
+                    login_user(usuario)
+                    login_user(usuario, form.recuerdame.data)
+                    app.logger.info(username + " logado correctamente")
+                    return redirect(url_for("private.indexcliente"))
+                else:
+                    error = "Usuario y/o contraseña incorrecta"
+                    app.logger.warning(error + " " + username)
     except Exception as e:
         app.logger.exception(e.__str__())
         error = "Nombre de usuario y/o contraseña incorrectos"

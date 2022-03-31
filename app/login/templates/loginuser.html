@@ -4,8 +4,14 @@
 {% block contenido %}
     <h1>Login</h1>
     <div class="row">
+    {%  if error %}
+        <div class="alert alert-danger" role="alert">
+            {{ error }}
+        </div>
+    {% endif %}
     <form action="{{ url_for('login.loginuser') }}" method="post">
         {{ generarForm(form) }}
+        {{ recaptcha }}
         <input type="submit" value="Login">
     </form>
 
